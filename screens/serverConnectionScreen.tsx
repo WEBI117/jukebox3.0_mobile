@@ -3,7 +3,7 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity
 import screenNames from './screenNames';
 import tw from 'twrnc'
 
-const serverConnectionScreen = (props: {setScreen: (screenname? : string) => JSX.Element}) => {
+const serverConnectionScreen = (props: {setScreen: (screenname? : string) => JSX.Element, propobj?: any}) => {
     const [ipAddress,setIpAddress] = useState('')
     const [UserName,setUserName] = useState('')
 

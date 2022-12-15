@@ -11,15 +11,19 @@ const socketUrl = 'http://192.168.0.109:3002'
 const url = 'http://192.168.0.109:3000/'
 const httpsurl = 'https://192.168.0.109:3443/'
 
-const screenNavigationControllerFunction = (setScreen: any, screenNameToNavigateTo?: string)  => {
+const screenNavigationControllerFunction = (setScreen: any, screenNameToNavigateTo?: string, props?: any)  => {
+    var propsobj = {
+        setScreen: setScreen, 
+        propsobj: props
+    }
     if(screenNameToNavigateTo === screenNames.welcome){
-        return WelcomeScreen({setScreen: setScreen})
+        return WelcomeScreen(propsobj)
     }
     if(screenNameToNavigateTo === screenNames.connectServer){
-        return ConnectServerScreen({setScreen: setScreen})
+        return ConnectServerScreen(propsobj)
     }
     // TODO: remove testing code
-    return ConnectServerScreen({setScreen: setScreen})
+    return ConnectServerScreen(propsobj)
     //return WelcomeScreen({setScreen: setScreen})
 }
 

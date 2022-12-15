@@ -7,7 +7,7 @@ const serveServerConnectionScreen = () => {
     return
 }
 
-const welcomeScreen = (props: {setScreen: (screenname?: string) => JSX.Element}) => {
+const welcomeScreen = (props: {setScreen: (screenname?: string) => JSX.Element, propsobj?: any}) => {
 
     return(
         <View style={tw`flex flex-col w-full h-full justify-start items-center`}>
