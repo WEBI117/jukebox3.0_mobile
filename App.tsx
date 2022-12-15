@@ -1,14 +1,38 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import tw from 'twrnc'
 import axios from 'axios'
 import { io } from 'socket.io-client'
+import WelcomeScreen from './screens/welcomescreen'
+import ConnectServerScreen from './screens/serverConnectionScreen'
+import screenNames from './screens/screenNames';
 const socketUrl = 'http://192.168.0.109:3002'
 const url = 'http://192.168.0.109:3000/'
 const httpsurl = 'https://192.168.0.109:3443/'
 
+const screenNavigationControllerFunction = (setScreen: any, screenNameToNavigateTo?: string)  => {
+    if(screenNameToNavigateTo === screenNames.welcome){
+        return WelcomeScreen({setScreen: setScreen})
+    }
+    if(screenNameToNavigateTo === screenNames.connectServer){
+        return ConnectServerScreen({setScreen: setScreen})
+    }
+    // TODO: remove testing code
+    return ConnectServerScreen({setScreen: setScreen})
+    //return WelcomeScreen({setScreen: setScreen})
+}
+
 export default function App() {
+    const [screen,setScreen] = useState<string>()
+    const[content,setContent] = useState<JSX.Element>(screenNavigationControllerFunction(setScreen))
+    useEffect(() => {
+        console.log(screen)
+        var newContent = screenNavigationControllerFunction(setScreen,screen)
+       setContent(newContent) 
+    }, [screen])
+    return content
+
     var [searchText, setSearchText] = useState<string>('Search Song Name')
     var [songList, setSongList] = useState([])
     var [socket, setSocket] = useState<any>({})
