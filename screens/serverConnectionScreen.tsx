@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
+import screenProps from '../interfaces/screenProps';
 import screenNames from './screenNames';
 import tw from 'twrnc'
 
-const serverConnectionScreen = (props: {setScreen: (screenname? : string) => JSX.Element, propobj?: any}) => {
-    const [ipAddress,setIpAddress] = useState('')
-    const [UserName,setUserName] = useState('')
+const serverConnectionScreen = (props: screenProps) => {
+    console.log(props.propsObj)
+    const [ipAddress, setIpAddress] = useState<string>('')
+    const [UserName, setUserName] = useState<string>('')
 
     return (
         <View style={tw`flex flex-col justify-start items-center`}>
@@ -18,13 +20,13 @@ const serverConnectionScreen = (props: {setScreen: (screenname? : string) => JSX
             <View style={tw`h-1/8 w-full`}></View>
 
             <View style={tw`flex flex-row w-2/3 h-1/6 justify-start items-center`}>
-                <TextInput style={tw`flex flex-row border-2 w-full h-2/3 rounded-lg text-base`} defaultValue='Server IP' 
-                clearTextOnFocus={true} onChangeText={(text) => {setIpAddress}}></TextInput>
+                <TextInput style={tw`flex flex-row border-2 w-full h-2/3 rounded-lg text-base`} defaultValue='Server IP'
+                    clearTextOnFocus={true} onChangeText={(text) => { setIpAddress }}></TextInput>
                 {/* <TouchableOpacity style={tw`bg-black w-fill h-full grow`}></TouchableOpacity> */}
             </View>
             <View style={tw`flex flex-row w-2/3 h-1/6 justify-start items-center`}>
-                <TextInput style={tw`flex flex-row border-2 w-full h-2/3 rounded-lg text-base`} defaultValue='UserName' 
-                clearTextOnFocus={true} onChangeText={(text) => {setUserName}}></TextInput>
+                <TextInput style={tw`flex flex-row border-2 w-full h-2/3 rounded-lg text-base`} defaultValue='UserName'
+                    clearTextOnFocus={true} onChangeText={(text) => { setUserName }}></TextInput>
                 {/* <TouchableOpacity style={tw`bg-black w-fill h-full grow`}></TouchableOpacity> */}
             </View>
 
@@ -33,7 +35,15 @@ const serverConnectionScreen = (props: {setScreen: (screenname? : string) => JSX
 
             {/* Button to navigate to another screen....may extract into a custom component*/}
             <View style={tw`w-2/3 h-1/12 p-3`}>
-                <TouchableOpacity style={tw`bg-blue-200 flex flex-row justify-center items-center w-full h-full`} onPress={() => {props.setScreen(screenNames.welcome)}}>
+                <TouchableOpacity style={tw`bg-blue-200 flex flex-row justify-center items-center w-full h-full`}
+                    onPress={() => {
+                        props.setScreenNameAndProps(
+                            {
+                                screenName: screenNames.welcome,
+                                props: { newprop: 'test2' }
+                            }
+                        )
+                    }}>
                     <Text>Connect</Text>
                 </TouchableOpacity>
             </View>
