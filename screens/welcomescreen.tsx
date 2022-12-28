@@ -6,7 +6,6 @@ import screenProps from '../interfaces/screenProps';
 import { useEffect, useState } from 'react';
 
 const welcomeScreen = (props: screenProps) => {
-    console.log(props.propsObj)
     return(
         <View style={tw`flex flex-col w-full h-full justify-start items-center`}>
             {/*seperator*/}
