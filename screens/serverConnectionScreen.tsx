@@ -3,9 +3,11 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity
 import screenProps from '../interfaces/screenProps';
 import screenNames from './screenNames';
 import tw from 'twrnc'
+import CustomTextInput from '../components/textinput'
+
+const ipaddressreference = 'http://192.168.0.109:3002'
 
 const serverConnectionScreen = (props: screenProps) => {
-    console.log(props.propsObj)
     const [ipAddress, setIpAddress] = useState<string>('')
     const [UserName, setUserName] = useState<string>('')
 
@@ -19,16 +21,9 @@ const serverConnectionScreen = (props: screenProps) => {
             {/*seperator*/}
             <View style={tw`h-1/8 w-full`}></View>
 
-            <View style={tw`flex flex-row w-2/3 h-1/6 justify-start items-center`}>
-                <TextInput style={tw`flex flex-row border-2 w-full h-2/3 rounded-lg text-base`} defaultValue='Server IP'
-                    clearTextOnFocus={true} onChangeText={(text) => { setIpAddress }}></TextInput>
-                {/* <TouchableOpacity style={tw`bg-black w-fill h-full grow`}></TouchableOpacity> */}
-            </View>
-            <View style={tw`flex flex-row w-2/3 h-1/6 justify-start items-center`}>
-                <TextInput style={tw`flex flex-row border-2 w-full h-2/3 rounded-lg text-base`} defaultValue='UserName'
-                    clearTextOnFocus={true} onChangeText={(text) => { setUserName }}></TextInput>
-                {/* <TouchableOpacity style={tw`bg-black w-fill h-full grow`}></TouchableOpacity> */}
-            </View>
+            <CustomTextInput stateSetter={setIpAddress} deaultvalue='IP Address' />
+
+            <CustomTextInput stateSetter={setUserName} deaultvalue='User Name' />
 
             {/*seperator*/}
             <View style={tw`h-1/8 w-full`}></View>
@@ -39,8 +34,9 @@ const serverConnectionScreen = (props: screenProps) => {
                     onPress={() => {
                         props.setScreenNameAndProps(
                             {
-                                screenName: screenNames.welcome,
-                                props: { newprop: 'test2' }
+                                screenName: screenNames.queue,
+                                // TODO: remove hard coded string for testing
+                                props: { serverIP: 'http://192.168.100.251' }
                             }
                         )
                     }}>
