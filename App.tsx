@@ -23,7 +23,7 @@ export default function App() {
         }
         if (screenName === screenNames.queue) {
             if (screenProps) {
-                return <ConnectServerScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
+                return <QueueScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
             }
             else {
                 // TODO: returning to welcome screen for testing...should return to connecte server screen instead.
@@ -38,12 +38,8 @@ export default function App() {
     const [currentScreenNameAndProps, setCurrentScreenNameAndProps] = useState<screenNavigationData>()
     const [content, setContent] = useState<JSX.Element>(<WelcomeScreen setScreenNameAndProps={setCurrentScreenNameAndProps} propsObj={{}} />)
 
-    var testfunc = () => {
-    }
-
     useEffect(() => {
         var newContent = screenNavigationControllerFunction(setCurrentScreenNameAndProps, currentScreenNameAndProps?.screenName, currentScreenNameAndProps?.props)
-        //testfunc()
         setContent(newContent)
     }, [currentScreenNameAndProps])
 
