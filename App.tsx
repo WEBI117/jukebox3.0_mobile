@@ -3,10 +3,11 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity
 import React, { useState, useEffect } from 'react';
 import tw from 'twrnc'
 import axios from 'axios'
-import { io } from 'socket.io-client'
+import { io, Socket } from "socket.io-client"
+import { ServerToClientEvents, ClientToServerEvents } from './interfaces/socketInterfaces';
 import WelcomeScreen from './screens/welcomescreen'
 import ConnectServerScreen from './screens/serverConnectionScreen'
-import {screenNames} from './constants';
+import { screenNames } from './constants';
 import screenNavigationData from './interfaces/screenNavigationData'
 import QueueScreen from './screens/queueScreen';
 
@@ -22,13 +23,11 @@ export default function App() {
             return <ConnectServerScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
         if (screenName === screenNames.queue) {
-            if (screenProps) {
+                screenProps.socket = socket
+                screenProps.setSocket = setSocket
                 return <QueueScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
-            }
-            else {
                 // TODO: returning to welcome screen for testing...should return to connecte server screen instead.
-                return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
-            }
+                //return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
         // TODO: remove testing code
         //return ConnectServerScreen(propsForNewScreen)
@@ -37,6 +36,7 @@ export default function App() {
 
     const [currentScreenNameAndProps, setCurrentScreenNameAndProps] = useState<screenNavigationData>()
     const [content, setContent] = useState<JSX.Element>(<WelcomeScreen setScreenNameAndProps={setCurrentScreenNameAndProps} propsObj={{}} />)
+    const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null)
 
     useEffect(() => {
         var newContent = screenNavigationControllerFunction(setCurrentScreenNameAndProps, currentScreenNameAndProps?.screenName, currentScreenNameAndProps?.props)
