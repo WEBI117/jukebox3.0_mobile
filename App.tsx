@@ -6,7 +6,7 @@ import axios from 'axios'
 import { io } from 'socket.io-client'
 import WelcomeScreen from './screens/welcomescreen'
 import ConnectServerScreen from './screens/serverConnectionScreen'
-import screenNames from './screens/screenNames';
+import {screenNames} from './constants';
 import screenNavigationData from './interfaces/screenNavigationData'
 import QueueScreen from './screens/queueScreen';
 

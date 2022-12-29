@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import screenProps from '../interfaces/screenProps';
-import screenNames from './screenNames';
+import {screenNames} from '../constants'
 import tw from 'twrnc'
 import CustomTextInput from '../components/textinput'
 
