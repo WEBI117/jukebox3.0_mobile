@@ -3,11 +3,20 @@ import React, { useState, useEffect } from 'react';
 import tw from 'twrnc'
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity, ShadowPropTypesIOS } from 'react-native';
 import SearchSongContent from './searchScreenContent';
+import screenProps from '../../interfaces/screenProps';
 
-const searchButtonHandler = () => {
-
+interface ScreenProps {
+    ServerURL: string,
+    SocketURL: string
 }
-const mainContent = (props: { songQueue: any, searchEnabled: boolean, setContentFunction: any }) => {
+
+interface Props extends ScreenProps {
+    songQueue: any, 
+    searchEnabled: boolean, 
+    setContentFunction: any
+}
+
+const mainContent = (props: Props) => {
     // TODO: Create and set song interface as use state type.
     return (
         <View style={tw`w-full h-full flex flex-col items-center justify-start`}>
@@ -26,10 +35,10 @@ const mainContent = (props: { songQueue: any, searchEnabled: boolean, setContent
             <View style={tw`w-3/4 h-3/12`}>
                 <TouchableOpacity
                     style={tw`h-full w-full flex flex-row justify-center items-center bg-blue-500`}
-                    onPress={() => props.setContentFunction(<SearchSongContent serverURL={'192.168.100.251:3000'}/>)}
+                    onPress={() => props.setContentFunction(<SearchSongContent serverURL={'192.168.100.251:3000'} />)}
                     //onPress={() => console.log('adding song')}
                     disabled={!props.searchEnabled}
-                    >
+                >
                     <Text>Add song</Text>
                 </TouchableOpacity>
             </View>

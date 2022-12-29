@@ -10,12 +10,12 @@ interface song {
 }
 
 interface Props {
-    serverURL: string
+    
 }
 
 const searchSongContent = (props: Props) => {
     const [searchTextValue, setSearchTextVaule] = useState<string>('')
-    const [searchedSongList, setsearchedSongList] = useState<song>([])
+    const [searchedSongList, setsearchedSongList] = useState<song[]>([])
     useEffect((() => {
         console.log(searchTextValue)
     }), [searchTextValue])
@@ -47,19 +47,19 @@ const searchSongContent = (props: Props) => {
     return (
         <View style={tw`w-full h-full flex flex-col justify-start items-center`}>
 
-            <CustomTextInput stateSetter={setSearchTextVaule} deaultvalue='Search' />
+            <CustomTextInput stateSetter={setSearchTextVaule} defaultvalue='Search' />
 
             <View style={tw`h-2/3 w-3/4`}>
                 <CustomScrollableList
                     data={searchedSongList}
-                    renderItem={({ name }) => {
+                    renderItem={(song: any) => {
                         return <View>
                             <Text>
-                                {name}
+                                {song.name}
                             </Text>
                         </View>
                     }}
-                    keyExtractor={({ name }) => name}
+                    keyExtractor={(song) => song.name}
                 />
             </View>
 

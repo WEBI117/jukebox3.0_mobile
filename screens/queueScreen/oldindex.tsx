@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
-import screenNames from '../screenNames';
+import { screenNames } from '../../constants'
 import screenProps from '../../interfaces/screenProps';
 import { io } from 'socket.io-client'
 import axios from 'axios'
 import tw from 'twrnc'
 import MainContent from './mainContent';
 import DisconnectedContent from './disconnectedContent'
+import httphelper from '../../helpers/httphelper';
 const socketUrl = 'http://192.168.0.109:3002'
 const url = 'http://192.168.0.109:3000/'
 const httpsurl = 'https://192.168.0.109:3443/'
@@ -22,9 +23,13 @@ const queueScreen = (props: screenProps) => {
     useEffect(() => {
         // TODO: put if condition to only rerender if current screen is Main Content.
         if (true) {
-            setContent(<MainContent songQueue={serverSongQueue}
+            setContent(<MainContent
+                songQueue={serverSongQueue}
                 searchEnabled={true}
-                setContentFunction={setContent} />)
+                setContentFunction={setContent}
+
+            />)
+
         }
     }, [serverSongQueue])
 
@@ -60,6 +65,16 @@ const queueScreen = (props: screenProps) => {
             setServerSongQueue([])
         }
     }
+
+    const getSearchedSongFromServer = async (searchString) => {
+
+        var result = await httphelper.getSearchResultFromServer(searchString, serverURL)
+        if(result != null){
+            return result.data
+        }
+        return []
+    }
+
     return (
         <View style={tw`w-full h-full flex flex-col items-center justify-start`}>
 
