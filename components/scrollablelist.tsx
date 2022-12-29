@@ -8,7 +8,7 @@ interface Props<T> {
     keyExtractor: (Item: T) => string
 }
 
-const customTextInput = <T extends unknown>(props: Props<T>) => {
+const customScrollableList = <T extends unknown>(props: Props<T>) => {
     return (
         <ScrollView style={tw`h-full w-full bg-blue-200`} contentContainerStyle={tw`h-full w-full p-2`}>
             {props.data.map((Item) => {
@@ -23,4 +23,4 @@ const customTextInput = <T extends unknown>(props: Props<T>) => {
     )
 }
 
-export default customTextInput
+export default customScrollableList
