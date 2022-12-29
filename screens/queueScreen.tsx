@@ -3,9 +3,10 @@ import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity
 import tw from 'twrnc'
 import screenProps from '../interfaces/screenProps';
 import { io } from "socket.io-client"
-import queueScreenProps from '../interfaces/queueScreenPropsinterface';
+import queueScreenProps from '../interfaces/queueScreenPropsInterface';
 import httphelper from '../helpers/httphelper';
 import CustomScrollableList from '../components/scrollablelist';
+import { screenNames } from '../constants';
 
 const queueScreen = (props: screenProps<queueScreenProps>) => {
 
@@ -30,10 +31,10 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                 sock.on('connect', async () => {
                     props.propsObj.setSocket(sock)
                     var Queue = await httphelper.getQueueFromServer(props.propsObj.serverURL)
-                    if(Queue){
+                    if (Queue) {
                         setSongQueue(Queue)
                     }
-                    else{
+                    else {
                         console.log("Server returned undefined queue")
                     }
                 })
@@ -48,10 +49,10 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                 })
                 sock.on('queueupdated', async () => {
                     var Queue = await httphelper.getQueueFromServer(props.propsObj.serverURL)
-                    if(Queue){
+                    if (Queue) {
                         setSongQueue(Queue)
                     }
-                    else{
+                    else {
                         console.log("Server returned undefined queue")
                     }
                 })
@@ -82,9 +83,9 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                     data={songQueue}
                     renderItem={(song) => {
                         return (
-                            <View style={tw`flex flex-row w-full items-center jusitfy-center`}>
+                            <View style={tw`flex flex-row w-full h-10 items-center justify-start`}>
                                 <Text>
-                                    song.name
+                                    {song.name}
                                 </Text>
                             </View>
                         )
@@ -100,7 +101,12 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                     style={tw`h-full w-full flex flex-row justify-center items-center bg-blue-500`}
 
                     // TODO: Navigate to adding screen song.
-                    onPress={() => console.log('adding song')}
+                    onPress={() => {
+                        props.setScreenNameAndProps({
+                            screenName: screenNames.search,
+                            props: {}
+                        })
+                    }}
 
                 // TODO: disable button if song already in queue.
                 //disabled={!props.searchEnabled}

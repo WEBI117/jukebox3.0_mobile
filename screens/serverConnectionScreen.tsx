@@ -4,7 +4,7 @@ import screenProps from '../interfaces/screenProps';
 import {screenNames} from '../constants'
 import tw from 'twrnc'
 import CustomTextInput from '../components/textinput'
-import queueScreenProps from '../interfaces/queueScreenPropsinterface';
+import queueScreenProps from '../interfaces/queueScreenPropsInterface';
 import httphelper from '../helpers/httphelper';
 
 const ipaddressreference = 'http://192.168.0.109:3002'
@@ -27,9 +27,9 @@ const serverConnectionScreen = (props: screenProps<Props>) => {
             {/*seperator*/}
             <View style={tw`h-1/8 w-full`}></View>
 
-            <CustomTextInput stateSetter={setIpAddress} deaultvalue='IP Address' />
+            <CustomTextInput stateSetter={setIpAddress} defaultvalue='IP Address' />
 
-            <CustomTextInput stateSetter={setUserName} deaultvalue='User Name' />
+            <CustomTextInput stateSetter={setUserName} defaultvalue='User Name' />
 
             {/*seperator*/}
             <View style={tw`h-1/8 w-full`}></View>
