@@ -1,11 +1,15 @@
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
 import ServerConnectionScreen from './serverConnectionScreen'
-import screenNames from './screenNames';
+import { screenNames } from '../constants';
 import screenProps from '../interfaces/screenProps';
-import { useEffect, useState } from 'react';
 
-const welcomeScreen = (props: screenProps) => {
+interface Props {
+
+}
+
+const welcomeScreen = (props: screenProps<Props>) => {
     return(
         <View style={tw`flex flex-col w-full h-full justify-start items-center`}>
             {/*seperator*/}
