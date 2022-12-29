@@ -4,10 +4,16 @@ import screenProps from '../interfaces/screenProps';
 import {screenNames} from '../constants'
 import tw from 'twrnc'
 import CustomTextInput from '../components/textinput'
+import queueScreenProps from '../interfaces/queueScreenPropsinterface';
+import httphelper from '../helpers/httphelper';
 
 const ipaddressreference = 'http://192.168.0.109:3002'
 
-const serverConnectionScreen = (props: screenProps) => {
+interface Props {
+    
+}
+
+const serverConnectionScreen = (props: screenProps<Props>) => {
     const [ipAddress, setIpAddress] = useState<string>('')
     const [UserName, setUserName] = useState<string>('')
 
@@ -32,11 +38,19 @@ const serverConnectionScreen = (props: screenProps) => {
             <View style={tw`w-2/3 h-1/12 p-3`}>
                 <TouchableOpacity style={tw`bg-blue-200 flex flex-row justify-center items-center w-full h-full`}
                     onPress={() => {
+                        
+                        var ipURL = httphelper.convertStringToURL(ipAddress)
+                        var propsforqueuescreen: Partial<queueScreenProps> = {
+                            // TODO: Remove hardcoded port numbers.
+                            socketURL: ipURL + ":3002",
+                            serverURL: ipURL + ":3000",
+                        }
+
                         props.setScreenNameAndProps(
                             {
                                 screenName: screenNames.queue,
                                 // TODO: remove hard coded string for testing
-                                props: { serverIP: 'http://192.168.100.251' }
+                                props: propsforqueuescreen
                             }
                         )
                     }}>
