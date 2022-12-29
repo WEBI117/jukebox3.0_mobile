@@ -7,6 +7,7 @@ queueupdated: () => void
 
 interface ClientToServerEvents {
 hello: () => void;
+addsong: (err: any, response: any) => void;
 }
 
 interface InterServerEvents {

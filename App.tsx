@@ -10,6 +10,7 @@ import ConnectServerScreen from './screens/serverConnectionScreen'
 import { screenNames } from './constants';
 import screenNavigationData from './interfaces/screenNavigationData'
 import QueueScreen from './screens/queueScreen';
+import SearchScreen from './screens/searchScreen';
 
 
 
@@ -29,6 +30,9 @@ export default function App() {
                 // TODO: returning to welcome screen for testing...should return to connecte server screen instead.
                 //return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
+        if(screenName === screenNames.search){
+            return <SearchScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
+        }
         // TODO: remove testing code
         //return ConnectServerScreen(propsForNewScreen)
         return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
@@ -37,6 +41,7 @@ export default function App() {
     const [currentScreenNameAndProps, setCurrentScreenNameAndProps] = useState<screenNavigationData>()
     const [content, setContent] = useState<JSX.Element>(<WelcomeScreen setScreenNameAndProps={setCurrentScreenNameAndProps} propsObj={{}} />)
     const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null)
+    //const [serverUrl, setServerUrl] = useState<string>()
 
     useEffect(() => {
         var newContent = screenNavigationControllerFunction(setCurrentScreenNameAndProps, currentScreenNameAndProps?.screenName, currentScreenNameAndProps?.props)

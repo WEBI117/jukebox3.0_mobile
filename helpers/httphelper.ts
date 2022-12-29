@@ -21,21 +21,21 @@ class httphelper {
             console.log('sendingRequest')
             var result = await axios({
                 method: 'get',
-                url: serverurl + 'search',
+                url: serverurl + '/search',
                 params: {
                     // TODO: sanitize searchtext before sending to server.
                     searchstring: searchstring
                 }
             })
-            return result
+            return result.data
         }
         catch (err) {
             console.log("Error occured with search request")
             console.log(err)
         }
-        return null
+        return []
     }
-    
+
     static convertStringToURL(str: string){
         return "http://" + str
     }
