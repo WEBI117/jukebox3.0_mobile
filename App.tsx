@@ -31,6 +31,7 @@ export default function App() {
                 //return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
         if(screenName === screenNames.search){
+            screenProps.socket = socket
             return <SearchScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
         // TODO: remove testing code

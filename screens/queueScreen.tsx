@@ -7,6 +7,7 @@ import queueScreenProps from '../interfaces/queueScreenPropsInterface';
 import httphelper from '../helpers/httphelper';
 import CustomScrollableList from '../components/scrollablelist';
 import { screenNames } from '../constants';
+import searchScreenProps from '../interfaces/searchScreenPropsInterface';
 
 const queueScreen = (props: screenProps<queueScreenProps>) => {
 
@@ -102,9 +103,12 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
 
                     // TODO: Navigate to adding screen song.
                     onPress={() => {
+                        var queuescreenprops: Partial<searchScreenProps> = {
+                            serverURL: props.propsObj.serverURL
+                        }
                         props.setScreenNameAndProps({
                             screenName: screenNames.search,
-                            props: {}
+                            props: queuescreenprops
                         })
                     }}
 
