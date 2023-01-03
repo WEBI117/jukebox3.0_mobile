@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
-import screenProps from '../interfaces/screenProps';
+import screenProps from '../../interfaces/screenProps';
 import { io } from "socket.io-client"
-import queueScreenProps from '../interfaces/queueScreenPropsInterface';
-import httphelper from '../helpers/httphelper';
-import CustomScrollableList from '../components/scrollablelist';
-import { screenNames } from '../constants';
-import searchScreenProps from '../interfaces/searchScreenPropsInterface';
+import queueScreenProps from './propsInterface';
+import httphelper from '../../helpers/httphelper';
+import CustomScrollableList from '../../components/scrollablelist';
+import { screenNames } from '../../constants';
+import searchScreenProps from '../search/propsInterface';
 
 const queueScreen = (props: screenProps<queueScreenProps>) => {
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
-import ServerConnectionScreen from './serverConnectionScreen'
-import { screenNames } from '../constants';
-import screenProps from '../interfaces/screenProps';
+import ServerConnectionScreen from '../server_connection/serverConnectionScreen'
+import { screenNames } from '../../constants';
+import screenProps from '../../interfaces/screenProps';
 
 interface Props {
 

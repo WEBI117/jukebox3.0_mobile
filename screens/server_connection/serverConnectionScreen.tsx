@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
-import screenProps from '../interfaces/screenProps';
-import {screenNames} from '../constants'
+import screenProps from '../../interfaces/screenProps';
+import {screenNames} from '../../constants'
 import tw from 'twrnc'
-import CustomTextInput from '../components/textinput'
-import queueScreenProps from '../interfaces/queueScreenPropsInterface';
-import httphelper from '../helpers/httphelper';
+import CustomTextInput from '../../components/textinput'
+import queueScreenProps from '../queue/propsInterface';
+import httphelper from '../../helpers/httphelper';
 
 const ipaddressreference = 'http://192.168.0.109:3002'
 

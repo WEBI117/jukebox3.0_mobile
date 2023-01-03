@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import tw from 'twrnc'
-import CustomTextInput from '../components/textinput';
-import CustomScrollableList from '../components/scrollablelist';
-import screenProps from '../interfaces/screenProps';
-import httphelper from '../helpers/httphelper';
-import searchScreenProps from '../interfaces/searchScreenPropsInterface';
+import CustomTextInput from '../../components/textinput';
+import CustomScrollableList from '../../components/scrollablelist';
+import screenProps from '../../interfaces/screenProps';
+import httphelper from '../../helpers/httphelper';
+import searchScreenProps from './propsInterface';
 
 
 
