@@ -6,16 +6,14 @@ import tw from 'twrnc'
 import CustomTextInput from '../../components/textinput'
 import queueScreenProps from '../queue/propsInterface';
 import httphelper from '../../helpers/httphelper';
+import serverConnectionScreenProps from './propsInterface';
 
 const ipaddressreference = 'http://192.168.0.109:3002'
 
-interface Props {
-    
-}
 
-const serverConnectionScreen = (props: screenProps<Props>) => {
-    const [ipAddress, setIpAddress] = useState<string>('')
-    const [UserName, setUserName] = useState<string>('')
+const serverConnectionScreen = (props: screenProps<serverConnectionScreenProps>) => {
+    const [ipAddress, setIpAddress] = useState<string>(props.propsObj.IpAddress != undefined ? props.propsObj.IpAddress : '')
+    const [UserName, setUserName] = useState<string>(props.propsObj.UserName != undefined ? props.propsObj.UserName : '')
 
     return (
         <View style={tw`flex flex-col justify-start items-center`}>

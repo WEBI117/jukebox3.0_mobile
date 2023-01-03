@@ -4,4 +4,6 @@ import { ServerToClientEvents, ClientToServerEvents } from '../../interfaces/soc
 export default interface searchScreenProps {
     socket: Socket<ServerToClientEvents, ClientToServerEvents> | null
     serverURL: string
+    searchText?: string
+    searchList?: any[]
 }

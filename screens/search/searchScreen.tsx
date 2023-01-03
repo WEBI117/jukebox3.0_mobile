@@ -12,8 +12,8 @@ import searchScreenProps from './propsInterface';
 
 
 const searchScreen = (props: screenProps<searchScreenProps>) => {
-    const [searchList, setSearchList] = useState<any[]>([])
-    const [searchText, setSearchText] = useState<string>('')
+    const [searchList, setSearchList] = useState<any[]>(props.propsObj.searchList != undefined ? props.propsObj.searchList : [])
+    const [searchText, setSearchText] = useState<string>(props.propsObj.searchText != undefined ? props.propsObj.searchText : '')
 
     const songItemPressHandler = (song: any) => {
         var sock = props.propsObj.socket
