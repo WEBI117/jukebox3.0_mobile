@@ -6,4 +6,5 @@ export default interface queueScreenProps {
     setSocket: React.Dispatch<React.SetStateAction<Socket<ServerToClientEvents, ClientToServerEvents> | null>>
     socketURL: string
     serverURL: string
+    songQueue?: any[]
 }

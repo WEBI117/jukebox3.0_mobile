@@ -8,11 +8,32 @@ import httphelper from '../../helpers/httphelper';
 import CustomScrollableList from '../../components/scrollablelist';
 import { screenNames } from '../../constants';
 import searchScreenProps from '../search/propsInterface';
+import navigation from '../../helpers/navigation';
+import { Socket } from 'dgram';
 
 const queueScreen = (props: screenProps<queueScreenProps>) => {
 
-    const [songQueue, setSongQueue] = useState<any[]>([])
+    const [songQueue, setSongQueue] = useState<any[]>(props.propsObj.songQueue != undefined ? props.propsObj.songQueue : [])
 
+    useEffect(() => {
+        (async () => {
+            console.log('test')
+            try {
+                var Queue = await httphelper.getQueueFromServer(props.propsObj.serverURL)
+                console.log(Queue.length)
+                if (Queue) {
+                    setSongQueue(Queue)
+                }
+                else {
+                    console.log("Server returned undefined queue")
+                }
+            }
+            catch (err) {
+                console.log(err)
+            }
+            return
+        })()
+    }, [])
     useEffect(() => {
         var sock = props.propsObj.socket
         var socketurl = props.propsObj.socketURL
@@ -31,13 +52,6 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
             if (sock != null) {
                 sock.on('connect', async () => {
                     props.propsObj.setSocket(sock)
-                    var Queue = await httphelper.getQueueFromServer(props.propsObj.serverURL)
-                    if (Queue) {
-                        setSongQueue(Queue)
-                    }
-                    else {
-                        console.log("Server returned undefined queue")
-                    }
                 })
                 sock.on('connect_error', (err) => {
                     console.log(err)
@@ -71,6 +85,34 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
         }
     }, [])
 
+    // To Server Connection Screen
+    const BackButtonHandler = () => {
+        var propsToSave: Partial<queueScreenProps> = {
+            socketURL: props.propsObj.socketURL,
+            serverURL: props.propsObj.serverURL,
+            songQueue: []
+        }
+
+        var propsToLoad = navigation.getContext(screenNames.connectServer)
+        navigation.navigate(screenNames.queue, propsToSave, screenNames.connectServer, propsToLoad, props.setScreenNameAndProps)
+    }
+
+    // To Search Screen
+    const navigateForwardHandler = () => {
+        var propsToSave: Partial<queueScreenProps> = {
+            socketURL: props.propsObj.socketURL,
+            serverURL: props.propsObj.serverURL,
+            songQueue: songQueue
+        }
+
+        var propsToLoad: Partial<searchScreenProps> = navigation.getContext(screenNames.search)
+        propsToLoad = {
+            serverURL: props.propsObj.serverURL,
+            searchText: ''
+        }
+        navigation.navigate(screenNames.queue, propsToSave, screenNames.search, propsToLoad, props.setScreenNameAndProps)
+    }
+
     return (
         <View style={tw`w-full h-full flex flex-col items-center justify-start`}>
 
@@ -79,6 +121,10 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                 style={tw`h-1/12 w-full`}
             ></View>
 
+            <View style={tw`flex flex-row items-center justify-start w-full`}>
+                <Button onPress={() => { BackButtonHandler() }} title='< Back'></Button>
+            </View>
+
             <View style={tw`h-2/3 w-3/4 bg-blue-200`}>
                 <CustomScrollableList
                     data={songQueue}
@@ -86,12 +132,12 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                         return (
                             <View style={tw`flex flex-row w-full h-10 items-center justify-start`}>
                                 <Text>
-                                    {song.name}
+                                    {`${song.name} ${song.uri}`}
                                 </Text>
                             </View>
                         )
                     }}
-                    keyExtractor={(song) => song.name}
+                    keyExtractor={(song) => song.id}
                 />
             </View>
 
@@ -100,18 +146,9 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
             <View style={tw`w-3/4 h-1/12`}>
                 <TouchableOpacity
                     style={tw`h-full w-full flex flex-row justify-center items-center bg-blue-500`}
-
-                    // TODO: Navigate to adding screen song.
                     onPress={() => {
-                        var queuescreenprops: Partial<searchScreenProps> = {
-                            serverURL: props.propsObj.serverURL
-                        }
-                        props.setScreenNameAndProps({
-                            screenName: screenNames.search,
-                            props: queuescreenprops
-                        })
+                        navigateForwardHandler()
                     }}
-
                 // TODO: disable button if song already in queue.
                 //disabled={!props.searchEnabled}
                 >
