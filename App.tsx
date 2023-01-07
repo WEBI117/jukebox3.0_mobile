@@ -5,12 +5,12 @@ import tw from 'twrnc'
 import axios from 'axios'
 import { io, Socket } from "socket.io-client"
 import { ServerToClientEvents, ClientToServerEvents } from './interfaces/socketInterfaces';
-import WelcomeScreen from './screens/welcomescreen'
-import ConnectServerScreen from './screens/serverConnectionScreen'
+import WelcomeScreen from './screens/welcome/welcomeScreen'
+import ConnectServerScreen from './screens/server_connection/serverConnectionScreen'
 import { screenNames } from './constants';
 import screenNavigationData from './interfaces/screenNavigationData'
-import QueueScreen from './screens/queueScreen';
-import SearchScreen from './screens/searchScreen';
+import QueueScreen from './screens/queue/queueScreen';
+import SearchScreen from './screens/search/searchScreen';
 
 
 
@@ -42,7 +42,6 @@ export default function App() {
     const [currentScreenNameAndProps, setCurrentScreenNameAndProps] = useState<screenNavigationData>()
     const [content, setContent] = useState<JSX.Element>(<WelcomeScreen setScreenNameAndProps={setCurrentScreenNameAndProps} propsObj={{}} />)
     const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null)
-    //const [serverUrl, setServerUrl] = useState<string>()
 
     useEffect(() => {
         var newContent = screenNavigationControllerFunction(setCurrentScreenNameAndProps, currentScreenNameAndProps?.screenName, currentScreenNameAndProps?.props)
