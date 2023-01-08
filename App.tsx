@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
-import tw from 'twrnc'
+import tw from './twrncCustom'
 import axios from 'axios'
 import { io, Socket } from "socket.io-client"
 import { ServerToClientEvents, ClientToServerEvents } from './interfaces/socketInterfaces';
@@ -49,7 +49,7 @@ export default function App() {
     }, [currentScreenNameAndProps])
 
     return (
-        <View style={tw`w-full h-full`}>
+        <View style={tw`w-full h-full text-cpink-100 bg-black`}>
             {content}
         </View>
     )
