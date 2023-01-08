@@ -70,17 +70,7 @@ const serverConnectionScreen = (props: screenProps<serverConnectionScreenProps>)
             <View style={tw`h-1/8 w-full`}></View>
 
             {/* Button to navigate to another screen....may extract into a custom component*/}
-            <View style={tw`w-2/3 h-1/12 p-3`}>
-            <CustomButton title={'Connect'} clickHandler={navigateForwardHandler}/>
-                <TouchableOpacity style={tw`bg-blue-200 flex flex-row justify-center items-center w-full h-full`}
-                    onPress={
-                        () => {
-                            navigateForwardHandler()
-                        }
-                    }>
-                    <Text>Connect</Text>
-                </TouchableOpacity>
-            </View>
+            <CustomButton title={'Connect'} clickHandler={navigateForwardHandler} />
 
         </View>
     )

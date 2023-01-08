@@ -10,6 +10,7 @@ import { screenNames } from '../../constants';
 import searchScreenProps from '../search/propsInterface';
 import navigation from '../../helpers/navigation';
 import { Socket } from 'dgram';
+import CustomButton from '../../components/custombutton'
 
 const queueScreen = (props: screenProps<queueScreenProps>) => {
 
@@ -125,7 +126,7 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                 <Button onPress={() => { BackButtonHandler() }} title='< Back'></Button>
             </View>
 
-            <View style={tw`h-2/3 w-3/4 bg-blue-200`}>
+            <View style={tw`h-2/3 w-3/4`}>
                 <CustomScrollableList
                     data={songQueue}
                     renderItem={(song) => {
@@ -143,19 +144,7 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
 
             <View style={tw`w-4 h-1/24`}></View>
 
-            <View style={tw`w-3/4 h-1/12`}>
-                <TouchableOpacity
-                    style={tw`h-full w-full flex flex-row justify-center items-center bg-blue-500`}
-                    onPress={() => {
-                        navigateForwardHandler()
-                    }}
-                // TODO: disable button if song already in queue.
-                //disabled={!props.searchEnabled}
-                >
-                    <Text>Add song</Text>
-                </TouchableOpacity>
-            </View>
-
+            <CustomButton clickHandler={navigateForwardHandler} title='Add Song' />
         </View>
     )
 }

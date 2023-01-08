@@ -10,7 +10,7 @@ interface Props<T> {
 
 const customScrollableList = <T extends unknown>(props: Props<T>) => {
     return (
-        <ScrollView style={tw`h-full w-full bg-blue-200`} contentContainerStyle={tw`h-full w-full p-2`}>
+        <ScrollView style={tw`h-full w-full`} contentContainerStyle={tw`h-full w-full p-2`}>
             {props.data.map((Item) => {
                 return (
                     //<View key={props.keyExtractor(Item)} style={tw`h-4 w-full`}>

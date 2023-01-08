@@ -36,9 +36,9 @@ const welcomeScreen = (props: screenProps<welcomeScreenProps>) => {
             {/*Page Title*/}
             <View style={tw`h-1/8 w-full`}></View>
             <View style={tw`w-full flex flex-col justify-start items-center`}>
-                <Text style={tw`text-3xl text-cpink-100`}>Welcome </Text>
-                <Text style={tw`text-3xl text-cpink-100`}>to</Text>
-                <Text style={tw`text-3xl text-cpink-100`}>JukeBox</Text>
+                <Text style={tw`text-3xl text-white`}>Welcome </Text>
+                <Text style={tw`text-3xl text-white`}>to</Text>
+                <Text style={tw`text-3xl text-white`}>JukeBox</Text>
             </View>
 
             {/* Button to navigate to another screen....may extract into a custom component*/}

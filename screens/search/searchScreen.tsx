@@ -58,6 +58,11 @@ const searchScreen = (props: screenProps<searchScreenProps>) => {
         navigation.navigate(screenNames.search, propsToSave, screenNames.queue, propsForNextScreen, props.setScreenNameAndProps)
     }
 
+    const searchButtonHandler = async () => {
+        setRequestLoading(true)
+        setSearchList(await httphelper.getSearchResultFromServer(searchText, props.propsObj.serverURL))
+        setRequestLoading(false)
+    }
     // For Testing
     useEffect(() => {
         //console.log(props.propsObj)
@@ -107,7 +112,7 @@ const searchScreen = (props: screenProps<searchScreenProps>) => {
 
             <View style={tw`w-4 h-1/24`}></View>
 
-            <View style={tw`h-2/3 w-3/4 bg-blue-200`}>
+            <View style={tw`h-2/3 w-3/4`}>
                 {loadingContent()}
             </View>
 
