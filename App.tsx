@@ -11,6 +11,7 @@ import { screenNames } from './constants';
 import screenNavigationData from './interfaces/screenNavigationData'
 import QueueScreen from './screens/queue/queueScreen';
 import SearchScreen from './screens/search/searchScreen';
+import SvgComponent from './components/backgroundSVGcomponent'
 
 
 
@@ -24,13 +25,13 @@ export default function App() {
             return <ConnectServerScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
         if (screenName === screenNames.queue) {
-                screenProps.socket = socket
-                screenProps.setSocket = setSocket
-                return <QueueScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
-                // TODO: returning to welcome screen for testing...should return to connecte server screen instead.
-                //return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
+            screenProps.socket = socket
+            screenProps.setSocket = setSocket
+            return <QueueScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
+            // TODO: returning to welcome screen for testing...should return to connecte server screen instead.
+            //return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
-        if(screenName === screenNames.search){
+        if (screenName === screenNames.search) {
             screenProps.socket = socket
             return <SearchScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
         }
@@ -50,6 +51,14 @@ export default function App() {
 
     return (
         <View style={tw`w-full h-full text-cpink-100 bg-black`}>
+            <View style={{
+                width: '100%',
+                height: '100%',
+                opacity: 0.8,
+                flex: 1
+            }}>
+                <SvgComponent/>
+            </View>
             {content}
         </View>
     )
