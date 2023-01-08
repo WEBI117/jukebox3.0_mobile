@@ -9,10 +9,11 @@ interface Props {
 
 const CustomButton = (props: Props) => {
     return(
-            <View style={tw`w-2/3 h-1/12 p-1`}>
-                <TouchableOpacity style={tw`bg-cpink-100 flex flex-row justify-center items-center w-full h-full`} 
-                onPress={() => {props.clickHandler}}>
-                    <Text>{props.title}</Text>
+            <View style={tw`w-2/3 h-1/14`}>
+                <TouchableOpacity style={tw`bg-cpink-100 flex flex-row 
+                    justify-center items-center w-full h-full rounded-2xl`} 
+                onPress={() => {props.clickHandler()}}>
+                    <Text style={tw`text-white`}>{props.title}</Text>
                 </TouchableOpacity>
             </View>
           )
