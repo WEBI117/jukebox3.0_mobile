@@ -1,14 +1,12 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
 import React, { useState, useEffect } from 'react';
+import { View } from 'react-native';
 import tw from './twrncCustom'
-import axios from 'axios'
-import { io, Socket } from "socket.io-client"
+import { Socket } from "socket.io-client"
 import { ServerToClientEvents, ClientToServerEvents } from './interfaces/socketInterfaces';
-import WelcomeScreen from './screens/welcome/welcomeScreen'
-import ConnectServerScreen from './screens/server_connection/serverConnectionScreen'
 import { screenNames } from './constants';
 import screenNavigationData from './interfaces/screenNavigationData'
+import WelcomeScreen from './screens/welcome/welcomeScreen'
+import ConnectServerScreen from './screens/server_connection/serverConnectionScreen'
 import QueueScreen from './screens/queue/queueScreen';
 import SearchScreen from './screens/search/searchScreen';
 import SvgComponent from './components/backgroundSVGcomponent'
@@ -16,7 +14,16 @@ import SvgComponent from './components/backgroundSVGcomponent'
 
 
 export default function App() {
+    //HOOKS
+    const [currentScreenNameAndProps, setCurrentScreenNameAndProps] = useState<screenNavigationData>()
+    const [content, setContent] = useState<JSX.Element>(<WelcomeScreen setScreenNameAndProps={setCurrentScreenNameAndProps} propsObj={{}} />)
+    const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null)
+    useEffect(() => {
+        var newContent = screenNavigationControllerFunction(setCurrentScreenNameAndProps, currentScreenNameAndProps?.screenName, currentScreenNameAndProps?.props)
+        setContent(newContent)
+    }, [currentScreenNameAndProps])
 
+    // METHODS
     const screenNavigationControllerFunction = (setScreenData: any, screenName?: string, screenProps?: any) => {
         if (screenName === screenNames.welcome) {
             return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
@@ -40,26 +47,17 @@ export default function App() {
         return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
     }
 
-    const [currentScreenNameAndProps, setCurrentScreenNameAndProps] = useState<screenNavigationData>()
-    const [content, setContent] = useState<JSX.Element>(<WelcomeScreen setScreenNameAndProps={setCurrentScreenNameAndProps} propsObj={{}} />)
-    const [socket, setSocket] = useState<Socket<ServerToClientEvents, ClientToServerEvents> | null>(null)
-
-    useEffect(() => {
-        var newContent = screenNavigationControllerFunction(setCurrentScreenNameAndProps, currentScreenNameAndProps?.screenName, currentScreenNameAndProps?.props)
-        setContent(newContent)
-    }, [currentScreenNameAndProps])
-
     return (
         <View style={tw`w-full h-full text-cpink-100 bg-black`}>
-            <View style={{
-                width: '100%',
-                height: '100%',
-                opacity: 0.8,
-                flex: 1
-            }}>
-                <SvgComponent/>
+
+            {/*Background*/}
+            <View style={{ width: '100%', height: '100%', opacity: 0.8, flex: 1 }}>
+                <SvgComponent />
             </View>
+
+            {/*Screens*/}
             {content}
+
         </View>
     )
 
