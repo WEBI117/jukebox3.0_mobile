@@ -1,21 +1,20 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity } from 'react-native';
+import { Text, View } from 'react-native';
 import tw from '../../twrncCustom';
-import screenProps from '../../interfaces/screenProps';
 import { io } from "socket.io-client"
-import queueScreenProps from './propsInterface';
-import httphelper from '../../helpers/httphelper';
-import CustomScrollableList from '../../components/scrollablelist';
 import { screenNames } from '../../constants';
+import screenProps from '../../interfaces/screenProps';
+import queueScreenProps from './propsInterface';
 import searchScreenProps from '../search/propsInterface';
+import httphelper from '../../helpers/httphelper';
 import navigation from '../../helpers/navigation';
-import { Socket } from 'dgram';
+import CustomScrollableList from '../../components/scrollablelist';
 import CustomButton from '../../components/custombutton'
+import CustomBackButton from '../../components/customBackButton';
 
 const queueScreen = (props: screenProps<queueScreenProps>) => {
-
+    //HOOKS
     const [songQueue, setSongQueue] = useState<any[]>(props.propsObj.songQueue != undefined ? props.propsObj.songQueue : [])
-
     useEffect(() => {
         (async () => {
             console.log('test')
@@ -86,6 +85,7 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
         }
     }, [])
 
+    //METHODS
     // To Server Connection Screen
     const BackButtonHandler = () => {
         var propsToSave: Partial<queueScreenProps> = {
@@ -93,11 +93,9 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
             serverURL: props.propsObj.serverURL,
             songQueue: []
         }
-
         var propsToLoad = navigation.getContext(screenNames.connectServer)
         navigation.navigate(screenNames.queue, propsToSave, screenNames.connectServer, propsToLoad, props.setScreenNameAndProps)
     }
-
     // To Search Screen
     const navigateForwardHandler = () => {
         var propsToSave: Partial<queueScreenProps> = {
@@ -105,7 +103,6 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
             serverURL: props.propsObj.serverURL,
             songQueue: songQueue
         }
-
         var propsToLoad: Partial<searchScreenProps> = navigation.getContext(screenNames.search)
         propsToLoad = {
             serverURL: props.propsObj.serverURL,
@@ -117,15 +114,17 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
     return (
         <View style={tw`w-full h-full flex flex-col items-center justify-start`}>
 
+            {/*seperator*/}
             <View
                 //style={tw`h-10 w-full bg-red-500`}
                 style={tw`h-1/12 w-full`}
             ></View>
 
-            <View style={tw`flex flex-row items-center justify-start w-full`}>
-                <Button onPress={() => { BackButtonHandler() }} title='< Back'></Button>
-            </View>
+            {/*Button to navigate to previous*/}
+            <CustomBackButton clickHandler={BackButtonHandler} />
 
+            {/*TODO: Add loading object for screen*/}
+            {/*Song Queue*/}
             <View style={tw`h-2/3 w-3/4`}>
                 <CustomScrollableList
                     data={songQueue}
@@ -142,8 +141,10 @@ const queueScreen = (props: screenProps<queueScreenProps>) => {
                 />
             </View>
 
+            {/*seperator*/}
             <View style={tw`w-4 h-1/24`}></View>
 
+            {/* Button to navigate to another screen*/}
             <CustomButton clickHandler={navigateForwardHandler} title='Add Song' />
         </View>
     )

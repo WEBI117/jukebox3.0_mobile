@@ -11,10 +11,13 @@ import CustomBackButton from '../../components/customBackButton';
 
 
 const welcomeScreen = (props: screenProps<welcomeScreenProps>) => {
+    //METHODS
+    // To Welcome Screen (Nowhere)
     const BackButtonHandler = () => {
         var propsToSave: welcomeScreenProps = {}
         navigation.navigate(screenNames.welcome, propsToSave, screenNames.welcome, {}, props.setScreenNameAndProps)
     }
+    // To Server Connection Screen
     const navigateForwardHandler = () => {
         var propsToSave: welcomeScreenProps = {}
         var propsToSend: Partial<serverConnectionScreenProps> = {}
@@ -27,7 +30,7 @@ const welcomeScreen = (props: screenProps<welcomeScreenProps>) => {
             {/*seperator*/}
             <View style={tw`h-1/22 w-full`}></View>
 
-            {/* Button to navigate to previous*/}
+            {/*Button to navigate to previous*/}
             <CustomBackButton clickHandler={BackButtonHandler}/>
 
             {/*seperator*/}
@@ -43,7 +46,7 @@ const welcomeScreen = (props: screenProps<welcomeScreenProps>) => {
             {/*seperator*/}
             <View style={tw`h-1/8 w-full`}></View>
 
-            {/* Button to navigate to another screen....may extract into a custom component*/}
+            {/* Button to navigate to another screen*/}
             <CustomButton clickHandler={navigateForwardHandler} title='Connect to Server' />
         </View>
     )

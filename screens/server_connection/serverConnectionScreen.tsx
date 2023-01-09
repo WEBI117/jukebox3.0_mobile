@@ -33,7 +33,6 @@ const serverConnectionScreen = (props: screenProps<serverConnectionScreenProps>)
         var propsToLoad = navigation.getContext(screenNames.welcome)
         navigation.navigate(screenNames.connectServer, propsToSave, screenNames.welcome, propsToLoad, props.setScreenNameAndProps)
     }
-
     // To Queue Screen
     const navigateForwardHandler = () => {
         var ipURL = httphelper.convertStringToURL(ipAddress)
@@ -75,7 +74,7 @@ const serverConnectionScreen = (props: screenProps<serverConnectionScreenProps>)
             {/*seperator*/}
             <View style={tw`h-1/8 w-full`}></View>
 
-            {/* Button to navigate to another screen....may extract into a custom component*/}
+            {/* Button to navigate to another screen*/}
             <CustomButton title={'Connect'} clickHandler={navigateForwardHandler} />
 
         </View>
