@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 class httphelper {
-
     static async getQueueFromServer(url: string) {
         try {
             var resp = await axios({
@@ -18,7 +17,6 @@ class httphelper {
         }
         return []
     }
-
     static async getSearchResultFromServer(searchstring: string, serverurl: string) {
         try {
             var result = await axios({
@@ -37,7 +35,6 @@ class httphelper {
         }
         return []
     }
-
     static convertStringToURL(str: string) {
         return "http://" + str
     }
