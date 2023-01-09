@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity, ShadowPropTypesIOS } from 'react-native';
+import { View, TextInput } from 'react-native';
 import tw from '../twrncCustom'
 
 interface Props {
@@ -13,7 +13,7 @@ const customTextInput = (props: Props) => {
             <TextInput style={tw`flex flex-row w-full h-full pl-4 rounded-lg text-white text-base`} defaultValue={props.defaultvalue}
                 clearTextOnFocus={true} onChangeText={(text) => { props.stateSetter(text) }}
                 selectionColor={'#ffffff'}
-                ></TextInput>
+            ></TextInput>
             {/* <TouchableOpacity style={tw`bg-black w-fill h-full grow`}></TouchableOpacity> */}
         </View>
     )

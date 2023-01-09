@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, ScrollView, TextInput, Button, TouchableOpacity, ShadowPropTypesIOS } from 'react-native';
 import Svg, { Path } from "react-native-svg"
 
 const SvgComponent = (props: any) => (
