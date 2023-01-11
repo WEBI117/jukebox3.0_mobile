@@ -5,6 +5,7 @@ import { screenNames } from '../../constants';
 import screenProps from '../../interfaces/screenProps';
 import welcomeScreenProps from './propsInterface';
 import serverConnectionScreenProps from '../server_connection/propsInterface'
+import scanScreenProps from '../scan/propsinterface'
 import navigation from '../../helpers/navigation';
 import CustomButton from '../../components/custombutton'
 import CustomBackButton from '../../components/customBackButton';
@@ -20,8 +21,9 @@ const welcomeScreen = (props: screenProps<welcomeScreenProps>) => {
     // To Server Connection Screen
     const navigateForwardHandler = () => {
         var propsToSave: welcomeScreenProps = {}
-        var propsToSend: Partial<serverConnectionScreenProps> = {}
-        navigation.navigate(screenNames.welcome, propsToSave, screenNames.connectServer,
+        //var propsToSend: Partial<serverConnectionScreenProps> = {}
+        var propsToSend: Partial<scanScreenProps> = {}
+        navigation.navigate(screenNames.welcome, propsToSave, screenNames.scan,
             propsToSend, props.setScreenNameAndProps)
     }
 

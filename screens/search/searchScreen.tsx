@@ -34,6 +34,7 @@ const searchScreen = (props: screenProps<searchScreenProps>) => {
     }
     // To Queue Screen
     const navigateForwardHandler = () => {
+        console.log('tst')
         var propsToSave: Partial<searchScreenProps> = {
             serverURL: props.propsObj.serverURL,
             searchList: searchList,
@@ -53,12 +54,14 @@ const searchScreen = (props: screenProps<searchScreenProps>) => {
         // TODO: Call Server endpoint to get updated list of songs and ensure added song does not already exist in list.
         var sock = props.propsObj.socket
         if (sock != null) {
-            sock.emit('addsong', song, (err: any, response: any) => {
-                if (err) {
+            sock.emit('addsong', song, (response: any) => {
+                var status = response.status
+                if (status === 'KO') {
                     console.log(err)
                     return
                 }
                 console.log(response)
+                navigateForwardHandler()
                 return
             })
         }

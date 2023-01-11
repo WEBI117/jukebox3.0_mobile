@@ -9,6 +9,7 @@ import WelcomeScreen from './screens/welcome/welcomeScreen'
 import ConnectServerScreen from './screens/server_connection/serverConnectionScreen'
 import QueueScreen from './screens/queue/queueScreen';
 import SearchScreen from './screens/search/searchScreen';
+import QRCodeScannerScreen from './screens/scan/scanScreen';
 import SvgComponent from './components/backgroundSVGcomponent'
 
 
@@ -27,6 +28,9 @@ export default function App() {
     const screenNavigationControllerFunction = (setScreenData: any, screenName?: string, screenProps?: any) => {
         if (screenName === screenNames.welcome) {
             return <WelcomeScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
+        }
+        if (screenName === screenNames.scan) {
+            return <QRCodeScannerScreen setScreenNameAndProps={setScreenData} propsObj={screenProps}/>
         }
         if (screenName === screenNames.connectServer) {
             return <ConnectServerScreen setScreenNameAndProps={setScreenData} propsObj={screenProps} />
